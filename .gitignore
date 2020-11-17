@@ -17,6 +17,8 @@ target/
 # Created by project using embedded tomcat
 tomcat.8080/
 
+# Created by maven shade plugin
+dependency-reduced-pom.xml
 
 # Packages #
 ############

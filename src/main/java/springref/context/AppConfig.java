@@ -1,6 +1,7 @@
 package springref.context;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.PropertySource;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -17,6 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 // Scans for Spring annotation managed beans recursively starting with the package. Can also supply a class
 // to scan starting with the package that holds the class.
 @ComponentScan(basePackageClasses = ApplicationLauncher.class)
+
+// Load property file
+@PropertySource("classpath:/application.properties")
 
 // @EnableWebMvc will automatically register a json converter if one is available,
 // specifically, if Jackson is on the classpath, i.e. if Jackson is a maven dependency,

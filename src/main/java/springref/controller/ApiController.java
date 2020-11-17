@@ -1,5 +1,7 @@
 package springref.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import springref.adaper.WidgetAdapter;
 import springref.dto.WidgetDto;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 public class ApiController {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final WidgetService widgetService;
     private final WidgetAdapter widgetAdapter;
@@ -29,6 +32,7 @@ public class ApiController {
 
     @GetMapping("/widgets")
     public List<WidgetDto> getWidgets() throws IOException {
+        log.debug("ApiController: getWidgets");
         List<WidgetDto> widgetDtos = widgetService.getWidgets()
                 .stream()
                 .map(widgetAdapter)
