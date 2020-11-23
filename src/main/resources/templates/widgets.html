@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<!-- Attribute xmlns:th defines a namespace to turn off warnings messages from IDEs -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Widgets</h1>
+
+<p>
+    Number of widgets: <span th:text="${widgets.size()}">3</span>
+</p>
+
+<ul th:each="widget: ${widgets}">
+    <li th:text="${widget.name}">widget</li>
+</ul>
+
+</body>
+</html>

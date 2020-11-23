@@ -1,5 +1,7 @@
 package springref.model;
 
+import java.util.Objects;
+
 public class Widget {
 
     private String name;
@@ -26,6 +28,20 @@ public class Widget {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Widget widget = (Widget) o;
+        return size == widget.size &&
+                Objects.equals(name, widget.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, size);
     }
 }
 

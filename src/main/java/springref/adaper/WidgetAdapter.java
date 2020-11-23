@@ -19,8 +19,6 @@ public class WidgetAdapter implements Function<Widget, WidgetDto> {
         return new Widget(dto.getName(), dto.getSize());
     }
 
-    // Lambda to convert Widget to WidgetDto.
-
     /**
      * Lambda that converts Widget to WidgetDto.
      */

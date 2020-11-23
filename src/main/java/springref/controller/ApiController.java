@@ -2,12 +2,9 @@ package springref.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 import springref.adaper.WidgetAdapter;
 import springref.dto.WidgetDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import springref.model.Widget;
 import springref.service.WidgetService;
 
@@ -19,6 +16,7 @@ import java.util.stream.Collectors;
  * Example of a REST API controller.
  */
 @RestController
+@RequestMapping("/api")
 public class ApiController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -32,7 +30,6 @@ public class ApiController {
 
     @GetMapping("/widgets")
     public List<WidgetDto> getWidgets() throws IOException {
-        log.debug("ApiController: getWidgets");
         List<WidgetDto> widgetDtos = widgetService.getWidgets()
                 .stream()
                 .map(widgetAdapter)
@@ -42,6 +39,7 @@ public class ApiController {
 
     @PostMapping("/widget")
     public void addWidget(@RequestBody WidgetDto widgetDto) {
+        log.debug("ApiController: addWidget: " + widgetDto);
         Widget widget = widgetAdapter.toWidget(widgetDto);
         widgetService.addWidget(widget);
     }

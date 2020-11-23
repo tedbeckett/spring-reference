@@ -33,8 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ApiControllerTest {
     @Autowired
     private WidgetService widgetService;
-    @Autowired
-    private WidgetAdapter widgetAdapter;
 
     @Autowired
     private ApiController apiController;
@@ -48,14 +46,10 @@ class ApiControllerTest {
 
     @Test
     void getWidgets() throws Exception {
-        // Test set up
-        widgetService.addWidget(new Widget("Joe", 1));
-        widgetService.addWidget(new Widget("Jane", 2));
-
         // First do the test in a style that allows for comments for someone unfamiliar with the testframework.
 
         // Build the request
-        MockHttpServletRequestBuilder builder = get("/widgets").accept(MediaType.APPLICATION_JSON);
+        MockHttpServletRequestBuilder builder = get("/api/widgets").accept(MediaType.APPLICATION_JSON);
 
         // Perform the request, getting back an object which allows verifying the result.
         ResultActions resultActions = mockMvc.perform(builder);
@@ -66,14 +60,14 @@ class ApiControllerTest {
         // json() is from JSONAssert. If not using strict mode, which is recommended,
         // it only compares the fields in the object returned to the fields explicitly provided, allowing fields which
         // like modification times or server generated identifiers, to be ignored in the comparison.
-        resultActions.andExpect(content().json("[ {name:\"Joe\", size:1 }, { name:\"Jane\", size:2 } ]"));
+        resultActions.andExpect(content().json("[ {name:\"Sprocket\", size:1 }, { name:\"Bracket\", size:2 } ]"));
 
         // Now do the test in the normal, fluid style.
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/widgets")
+                .get("/api/widgets")
                 .accept(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk())
-                .andExpect(content().json("[ {name:\"Joe\", size:1 }, { name:\"Jane\", size:2 } ]"));
+                .andExpect(content().json("[ {name:\"Sprocket\", size:1 }, { name:\"Bracket\", size:2 } ]"));
     }
 }
